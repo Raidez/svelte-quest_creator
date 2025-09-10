@@ -1,0 +1,252 @@
+[
+    { "_type": "comment", "value": "Money" },
+    {
+        "_type": "item",
+        "name": "gold",
+        "desc": "Source of happiness.",
+        "price": 10,
+        "sprite": {
+            "_type": "sprite",
+            "type": "tileset",
+            "path": "assets/DawnLike/Items/Money.png",
+            "tile_size": [ 16, 16 ],
+            "tile_index": [ 0, 1 ]
+        }
+    },
+    {
+        "_type": "item",
+        "name": "diamond",
+        "desc": "Bring joy to everyone.",
+        "price": 50,
+        "sprite": {
+            "_type": "sprite",
+            "type": "tileset",
+            "path": "assets/DawnLike/Items/Money.png",
+            "tile_size": [ 16, 16 ],
+            "tile_index": [ 1, 2 ]
+        }
+    },
+    { "_type": "comment", "value": "Food" },
+    {
+        "_type": "item",
+        "name": "ration",
+        "desc": "Keeps heroes fed.",
+        "price": 5,
+        "sprite": {
+            "_type": "sprite",
+            "type": "tileset",
+            "path": "assets/DawnLike/Items/Food.png",
+            "tile_size": [ 16, 16 ],
+            "tile_index": [ 5, 4 ]
+        }
+    },
+    { "_type": "comment", "value": "Light sources" },
+    {
+        "_type": "item",
+        "name": "torch",
+        "desc": "Provides light in dark areas.",
+        "price": 2,
+        "sprite": {
+            "_type": "sprite",
+            "type": "tileset",
+            "path": "assets/DawnLike/Items/Light.png",
+            "tile_size": [ 16, 16 ],
+            "tile_index": [ 0, 0 ]
+        }
+    },
+    {
+        "_type": "item",
+        "name": "lamp",
+        "desc": "Better light source than a torch.",
+        "price": 5,
+        "sprite": {
+            "_type": "sprite",
+            "type": "tileset",
+            "path": "assets/DawnLike/Items/Light.png",
+            "tile_size": [ 16, 16 ],
+            "tile_index": [ 3, 0 ]
+        }
+    },
+    { "_type": "comment", "value": "Tools" },
+    {
+        "_type": "item",
+        "name": "lockpick",
+        "desc": "Unlocks chests and doors.",
+        "price": 15,
+        "sprite": {
+            "_type": "sprite",
+            "type": "tileset",
+            "path": "assets/DawnLike/Items/Wand.png",
+            "tile_size": [ 16, 16 ],
+            "tile_index": [ 3, 5 ]
+        },
+        "require": [ "rogue" ]
+    },
+    {
+        "_type": "item",
+        "name": "crowbar",
+        "desc": "Also unlock chests and doors with more force.",
+        "price": 10,
+        "sprite": {
+            "_type": "sprite",
+            "type": "tileset",
+            "path": "assets/DawnLike/Items/Tool.png",
+            "tile_size": [ 16, 16 ],
+            "tile_index": [ 4, 1 ]
+        },
+        "require": [ "warrior", "paladin" ]
+    },
+    {
+        "_type": "item",
+        "name": "rope",
+        "desc": "Useful for climbing and tying things.",
+        "price": 5,
+        "sprite": {
+            "_type": "sprite",
+            "type": "tileset",
+            "path": "assets/DawnLike/Items/Tool.png",
+            "tile_size": [ 16, 16 ],
+            "tile_index": [ 2, 2 ]
+        }
+    },
+    {
+        "_type": "item",
+        "name": "compass",
+        "desc": "Helps with navigation.",
+        "price": 8,
+        "sprite": {
+            "_type": "sprite",
+            "type": "tileset",
+            "path": "assets/DawnLike/Items/Tool.png",
+            "tile_size": [ 16, 16 ],
+            "tile_index": [ 0, 2 ]
+        }
+    },
+    {
+        "_type": "item",
+        "name": "trap",
+        "desc": "Catch them all!",
+        "price": 15,
+        "sprite": {
+            "_type": "sprite",
+            "type": "tileset",
+            "path": "assets/DawnLike/Items/Tool.png",
+            "tile_size": [ 16, 16 ],
+            "tile_index": [ 6, 1 ]
+        },
+        "require": [ "rogue", "summoner" ]
+    },
+    { "_type": "comment", "value": "Equipment" },
+    {
+        "_type": "item",
+        "name": "amulet",
+        "desc": "A magical amulet that grants protection.",
+        "price": 30,
+        "sprite": {
+            "_type": "sprite",
+            "type": "tileset",
+            "path": "assets/DawnLike/Items/Amulet.png",
+            "tile_size": [ 16, 16 ],
+            "tile_index": [ 0, 1 ]
+        }
+    },
+    {
+        "_type": "item",
+        "name": "arrows",
+        "desc": "Ammunition for bows.",
+        "price": 1,
+        "sprite": {
+            "_type": "sprite",
+            "type": "tileset",
+            "path": "assets/DawnLike/Items/Ammo.png",
+            "tile_size": [ 16, 16 ],
+            "tile_index": [ 0, 2 ]
+        },
+        "require": [ "rogue" ]
+    },
+    {
+        "_type": "item",
+        "name": "helmet",
+        "desc": "A helmet that protects the head.",
+        "price": 5,
+        "sprite": {
+            "_type": "sprite",
+            "type": "tileset",
+            "path": "assets/DawnLike/Items/Hat.png",
+            "tile_size": [ 16, 16 ],
+            "tile_index": [ 2, 0 ]
+        },
+        "require": [ "warrior", "paladin", "rogue", "bard" ],
+        "synergy": [ "shield", "armor" ]
+    },
+    {
+        "_type": "item",
+        "name": "shield",
+        "desc": "A sturdy shield for blocking attacks.",
+        "price": 10,
+        "sprite": {
+            "_type": "sprite",
+            "type": "tileset",
+            "path": "assets/DawnLike/Items/Shield.png",
+            "tile_size": [ 16, 16 ],
+            "tile_index": [ 5, 0 ]
+        },
+        "require": [ "warrior", "paladin", "rogue" ],
+        "synergy": [ "armor", "helmet" ]
+    },
+    {
+        "_type": "item",
+        "name": "armor",
+        "desc": "Protective armor that reduces damage.",
+        "price": 20,
+        "sprite": {
+            "_type": "sprite",
+            "type": "tileset",
+            "path": "assets/DawnLike/Items/Armor.png",
+            "tile_size": [ 16, 16 ],
+            "tile_index": [ 5, 0 ]
+        },
+        "require": [ "warrior",  "paladin" ],
+        "synergy": [ "shield", "helmet" ]
+    },
+    { "_type": "comment", "value": "Consumables" },
+    {
+        "_type": "item",
+        "name": "bandage",
+        "desc": "Heal small wounds.",
+        "price": 5,
+        "sprite": {
+            "_type": "sprite",
+            "type": "tileset",
+            "path": "assets/DawnLike/Items/Tool.png",
+            "tile_size": [ 16, 16 ],
+            "tile_index": [ 4, 0 ]
+        }
+    },
+    {
+        "_type": "item",
+        "name": "health potion",
+        "desc": "A potion that restores health.",
+        "price": 12,
+        "sprite": {
+            "_type": "sprite",
+            "type": "tileset",
+            "path": "assets/DawnLike/Items/Potion.png",
+            "tile_size": [ 16, 16 ],
+            "tile_index": [ 0, 0 ]
+        }
+    },
+    {
+        "_type": "item",
+        "name": "oil",
+        "desc": "Fire in a bottle.",
+        "price": 7,
+        "sprite": {
+            "_type": "sprite",
+            "type": "tileset",
+            "path": "assets/DawnLike/Items/Potion.png",
+            "tile_size": [ 16, 16 ],
+            "tile_index": [ 4, 2 ]
+        }
+    }
+]
