@@ -1,7 +1,7 @@
 <script>
-  import FormQuest from "./lib/FormQuest.svelte";
+    import FormQuest from "./components/FormQuest.svelte";
 </script>
 
 <main>
-  <FormQuest />
+    <FormQuest />
 </main>

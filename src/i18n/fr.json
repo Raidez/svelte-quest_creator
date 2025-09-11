@@ -1,0 +1,153 @@
+{
+    "website_title": "Quest Creator",
+    "button_switch_language": "Changer de langue",
+
+    "quest": {
+        "section_title": "Quête",
+        "label_name": "Nom",
+        "label_desc": "Description",
+        "label_reward": "Récompense",
+        "label_duration": "Durée",
+        "label_time_limit": "Limite de temps"
+    },
+    "events": {
+        "section_title": "Événements",
+        "text_no_events": "Aucun événement ajouté pour le moment.",
+        "label_difficulty": "Difficulté",
+        "button_add_event": "Ajouter un événement"
+    },
+    "event": {
+        "section_title": "Événement",
+        "label_name": "Nom",
+        "label_desc": "Description",
+        "label_difficulty": "Difficulté",
+        "button_add_bonus": "Ajouter un bonus"
+    },
+    "bonus": {
+        "section_title": "Bonus",
+        "label_type": "Type",
+        "label_type_item": "Objet",
+        "label_type_job": "Métier",
+        "label_name_item": "Nom de l'objet",
+        "label_name_job": "Titre du métier",
+        "label_value": "Valeur"
+    },
+    
+    "items": {
+        "gold": {
+            "name": "or",
+            "desc": "Source de bonheur."
+        },
+        "diamond": {
+            "name": "diamant",
+            "desc": "Apporte de la joie à tous."
+        },
+        "ration": {
+            "name": "ration",
+            "desc": "Nourrit les héros."
+        },
+        "torch": {
+            "name": "torche",
+            "desc": "Éclaire les endroits sombres."
+        },
+        "lamp": {
+            "name": "lampe",
+            "desc": "Meilleure source de lumière qu'une torche."
+        },
+        "lockpick": {
+            "name": "crochet",
+            "desc": "Ouvre les coffres et les portes."
+        },
+        "crowbar": {
+            "name": "pied-de-biche",
+            "desc": "Ouvre aussi les coffres et les portes avec plus de force."
+        },
+        "rope": {
+            "name": "corde",
+            "desc": "Utile pour grimper et attacher des objets."
+        },
+        "compass": {
+            "name": "boussole",
+            "desc": "Aide à la navigation."
+        },
+        "trap": {
+            "name": "piège",
+            "desc": "Attrapez-les tous !"
+        },
+        "amulet": {
+            "name": "amulette",
+            "desc": "Une amulette magique qui offre une protection."
+        },
+        "arrows": {
+            "name": "flèches",
+            "desc": "Munitions pour arcs."
+        },
+        "helmet": {
+            "name": "casque",
+            "desc": "Un casque qui protège la tête."
+        },
+        "shield": {
+            "name": "bouclier",
+            "desc": "Un bouclier solide pour bloquer les attaques."
+        },
+        "armor": {
+            "name": "armure",
+            "desc": "Armure protectrice qui réduit les dégâts."
+        },
+        "bandage": {
+            "name": "bandage",
+            "desc": "Soigne les petites blessures."
+        },
+        "health potion": {
+            "name": "potion de soin",
+            "desc": "Une potion qui restaure la santé."
+        },
+        "oil": {
+            "name": "huile",
+            "desc": "Du feu en bouteille."
+        }
+    },
+
+    "commons": {
+        "button_close": "Fermer",
+		"button_remove": "Supprimer"
+    },
+    "form": {
+        "button_reset": "Réinitialiser",
+        "button_import_json": "Importer JSON",
+        "button_generate_quest": "Générer la quête"
+    },
+    "modal": {
+        "import": {
+            "title": "Collez votre JSON ici",
+            "button_import": "Importer JSON"
+        },
+        "export": {
+            "title": "Votre JSON de quête",
+            "button_copy": "Copier dans le presse-papiers"
+        },
+        "pick_item": {
+            "title": "Choisir un objet"
+        }
+    },
+    "toast": {
+        "invalid_json": "JSON invalide !",
+        "invalid_quest_json": "Structure du JSON de quête invalide !",
+        "quest_json_copied": "Le JSON de la quête a été copié dans le presse-papiers !"
+    },
+	"popover": {
+        "quest_name": "Le nom de ta quête.",
+        "quest_desc": "Une petite description pour ta quête.",
+        "quest_reward": "La récompense que tu recevras à la fin.",
+        "quest_duration": "Combien de jours pour finir ta quête.",
+        "quest_time_limit": "Le temps maximum pour réussir ta quête (en jours).",
+        "quest_difficulty": "Le taux de réussite globale de ta quête.",
+        "event_name": "Le nom de l'événement.",
+        "event_desc": "Une petite description pour l'événement.",
+        "event_difficulty": "Le taux de réussite de cet événement.",
+        "bonus_type": "Le type de bonus.",
+        "bonus_name_item": "L'objet qui augmentera les chances de réussite.",
+        "bonus_name_job": "Le métier qui augmentera les chances de réussite.",
+        "bonus_value": "De combien ce bonus augmentera les chances de réussite."
+	}
+}

@@ -1,4 +1,8 @@
 <script>
+    import * as bootstrap from "bootstrap/dist/js/bootstrap.bundle.min";
+    import { onMount } from "svelte";
+    import { _ } from "svelte-i18n";
+
     let {
         index = 0,
         type = $bindable(),
@@ -28,6 +32,15 @@
             console.error("Error fetching items:", error);
         });
 
+    onMount(() => {
+        const popoverTriggerList = document.querySelectorAll(
+            '[data-bs-toggle="popover"]',
+        );
+        [...popoverTriggerList].map(
+            (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl),
+        );
+    });
+
     function selectItem(itemName) {
         name = itemName;
     }
@@ -37,12 +50,12 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Pick item</h5>
+                <h5 class="modal-title">{$_("modal.pick_item.title")}</h5>
                 <button
                     type="button"
                     class="btn-close"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
+                    aria-label={$_("commons.button_close")}
                 ></button>
             </div>
             <div class="modal-body d-flex justify-content-center">
@@ -53,6 +66,7 @@
                             class="btn btn-light m-1 col-2"
                             data-bs-dismiss="modal"
                             onclick={() => selectItem(item.name)}
+                            title={$_(`items.${item.name}.desc`)}
                         >
                             <figure
                                 class="d-flex flex-column align-items-center"
@@ -66,7 +80,7 @@
                                         .tile_index[1] * 16}px;"
                                 />
                                 <figcaption class="mt-2 text-center">
-                                    {item.name}
+                                    {$_(`items.${item.name}.name`)}
                                 </figcaption>
                             </figure>
                         </button>
@@ -79,41 +93,61 @@
 
 <main class="mb-4 p-3 border rounded">
     <div class="d-flex justify-content-between mb-2">
-        <h2>Bonus</h2>
+        <h2>{$_("bonus.section_title")}</h2>
         <button type="button" class="btn btn-danger btn-sm" onclick={remove}>
-            <i class="bi bi-trash"></i> Remove
+            <i class="bi bi-trash"></i>
+            {$_("commons.button_remove")}
         </button>
     </div>
 
     <div>
-        <label for="bonus_type-{index}" class="form-label">Type:</label>
-        <select
-            name="type"
-            id="bonus_type-{index}"
-            class="form-select"
-            required
-            bind:value={type}
+        <label for="bonus_type-{index}" class="form-label"
+            >{$_("bonus.label_type")}:</label
         >
-            <option value="item">Item</option>
-            <option value="job">Job</option>
-        </select>
+
+        <div class="input-group">
+            <select
+                name="type"
+                id="bonus_type-{index}"
+                class="form-select"
+                required
+                bind:value={type}
+                data-bs-toggle="popover"
+                data-bs-trigger="focus"
+                data-bs-content={$_("popover.bonus_type")}
+            >
+                <option value="item">{$_("bonus.label_type_item")}</option>
+                <option value="job">{$_("bonus.label_type_job")}</option>
+            </select>
+            <i class="input-group-text bi bi-asterisk text-danger"></i>
+        </div>
     </div>
     <div>
         <label for="bonus_name-{index}" class="form-label">
-            {#if type === "item"}Item Name{:else}Job Title{/if}:
+            {#if type === "item"}
+                {$_("bonus.label_name_item")}
+            {:else if type === "job"}
+                {$_("bonus.label_name_job")}
+            {/if}:
         </label>
         {#if type === "job"}
-            <select
-                name="bonus_name-{index}"
-                id="bonus_name-{index}"
-                class="form-select"
-                required
-                bind:value={name}
-            >
-                {#each jobs as job}
-                    <option value={job}>{job}</option>
-                {/each}
-            </select>
+            <div class="input-group">
+                <select
+                    name="bonus_name-{index}"
+                    id="bonus_name-{index}"
+                    class="form-select"
+                    required
+                    bind:value={name}
+                    data-bs-toggle="popover"
+                    data-bs-trigger="focus"
+                    data-bs-content={$_("popover.bonus_name_job")}
+                >
+                    {#each jobs as job}
+                        <option value={job}>{job}</option>
+                    {/each}
+                </select>
+                <i class="input-group-text bi bi-asterisk text-danger"></i>
+            </div>
         {:else if type === "item"}
             <div class="input-group">
                 {#if selectedItem}
@@ -135,29 +169,41 @@
                     class="form-control"
                     required
                     bind:value={name}
+                    data-bs-toggle="popover"
+                    data-bs-trigger="focus"
+                    data-bs-content={$_("popover.bonus_name_item")}
                 />
+                <i class="input-group-text bi bi-asterisk text-danger"></i>
                 <button
                     class="btn btn-outline-secondary"
                     type="button"
                     data-bs-toggle="modal"
                     data-bs-target="#modalPickItem"
-                    aria-label="Pick item"
+                    aria-label={$_("modal.pick_item.title")}
                     ><i class="bi bi-eyedropper"></i></button
                 >
             </div>
         {/if}
     </div>
     <div>
-        <label for="bonus_value-{index}" class="form-label">Value:</label>
-        <input
-            type="number"
-            name="bonus_value-{index}"
-            id="bonus_value-{index}"
-            class="form-control"
-            required
-            min="0"
-            bind:value
-        />
+        <label for="bonus_value-{index}" class="form-label"
+            >{$_("bonus.label_value")}:</label
+        >
+        <div class="input-group">
+            <input
+                type="number"
+                name="bonus_value-{index}"
+                id="bonus_value-{index}"
+                class="form-control"
+                required
+                min="0"
+                bind:value
+                data-bs-toggle="popover"
+                data-bs-trigger="focus"
+                data-bs-content={$_("popover.bonus_value")}
+            />
+            <i class="input-group-text bi bi-asterisk text-danger"></i>
+        </div>
     </div>
 </main>
 

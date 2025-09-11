@@ -1,8 +1,11 @@
 <script>
     import * as bootstrap from "bootstrap/dist/js/bootstrap.bundle.min";
+    import { onMount } from "svelte";
+    import { _, locale } from "svelte-i18n";
+    import { get } from "svelte/store";
+    import toastify from "toastify-js";
     import { Quest, QuestEvent } from "../models.svelte";
     import FormEvent from "./FormEvent.svelte";
-    import toastify from "toastify-js";
 
     let currentQuest = $state(new Quest());
     let textareaImport = $state("");
@@ -15,6 +18,40 @@
         ),
     );
 
+    // Ensure popovers are initialized on mount
+    onMount(() => {
+        initializePopovers();
+    });
+
+    // Re-initialize popovers when locale changes
+    locale.subscribe(() => {
+        // Wait for DOM update before re-initializing popovers
+        setTimeout(() => {
+            initializePopovers();
+        }, 0);
+        cookieStore.set("locale", get(locale));
+    });
+
+    function switchLocale() {
+        switch (get(locale)) {
+            case "fr":
+                locale.set("en");
+                break;
+            case "en":
+                locale.set("fr");
+                break;
+        }
+    }
+
+    function initializePopovers() {
+        const popoverTriggerList = document.querySelectorAll(
+            '[data-bs-toggle="popover"]',
+        );
+        [...popoverTriggerList].map(
+            (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl),
+        );
+    }
+
     function importJSON() {
         if (textareaImport) {
             let parsed;
@@ -22,7 +59,7 @@
                 parsed = JSON.parse(textareaImport);
             } catch (error) {
                 toastify({
-                    text: "Invalid JSON!",
+                    text: $_("toast.invalid_json"),
                     duration: 3000,
                     gravity: "top",
                     position: "right",
@@ -38,7 +75,7 @@
                 currentQuest = Quest.fromJSON(parsed);
             } catch (error) {
                 toastify({
-                    text: "Invalid Quest JSON structure!",
+                    text: $_("toast.invalid_quest_json"),
                     duration: 3000,
                     gravity: "top",
                     position: "right",
@@ -104,7 +141,7 @@
         if (textareaExport) {
             navigator.clipboard.writeText(textareaExport);
             toastify({
-                text: "Quest JSON copied to clipboard!",
+                text: $_("toast.quest_json_copied"),
                 duration: 3000,
                 gravity: "top",
                 position: "right",
@@ -141,7 +178,7 @@
                 aria-controls="collapse-event-{index}"
                 onclick={() => collapseBonus(index)}
             >
-                Event #{index + 1}
+                {$_("event.section_title")} #{index + 1}
             </button>
         </h2>
         <div
@@ -168,12 +205,12 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Paste your JSON here</h5>
+                <h5 class="modal-title">{$_("modal.import.title")}</h5>
                 <button
                     type="button"
                     class="btn-close"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
+                    aria-label={$_("commons.button_close")}
                 ></button>
             </div>
             <div class="modal-body">
@@ -189,12 +226,13 @@
                 <button
                     type="button"
                     class="btn btn-secondary"
-                    data-bs-dismiss="modal">Close</button
+                    data-bs-dismiss="modal">{$_("commons.button_close")}</button
                 >
                 <button
                     type="button"
                     class="btn btn-primary"
-                    onclick={importJSON}>Import JSON</button
+                    onclick={importJSON}
+                    >{$_("modal.import.button_import")}</button
                 >
             </div>
         </div>
@@ -205,12 +243,12 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Your Quest JSON</h5>
+                <h5 class="modal-title">{$_("modal.export.title")}</h5>
                 <button
                     type="button"
                     class="btn-close"
                     data-bs-dismiss="modal"
-                    aria-label="Close"
+                    aria-label={$_("commons.button_close")}
                 ></button>
             </div>
             <div class="modal-body">
@@ -226,7 +264,7 @@
                 <button
                     type="button"
                     class="btn btn-secondary"
-                    data-bs-dismiss="modal">Close</button
+                    data-bs-dismiss="modal">{$_("commons.button_close")}</button
                 >
                 <button
                     type="button"
@@ -234,7 +272,7 @@
                     onclick={copyToClipboard}
                 >
                     <i class="bi bi-clipboard"></i>
-                    Copy to Clipboard</button
+                    {$_("modal.export.button_copy")}</button
                 >
             </div>
         </div>
@@ -243,79 +281,139 @@
 
 <main class="bg-light">
     <div class="container py-5">
-        <h1 class="mb-4">Quest Creator</h1>
+        <h1 class="mb-4">
+            {$_("website_title")}
+
+            <button
+                type="button"
+                class="btn"
+                onclick={switchLocale}
+                aria-label={$_("button_switch_language")}
+                title={$_("button_switch_language")}
+            >
+                {#if $locale === "fr"}
+                    <i class="fi fi-us"></i>
+                {:else if $locale === "en"}
+                    <i class="fi fi-fr"></i>
+                {/if}
+            </button>
+        </h1>
         <form class="card card-body" onsubmit={submitForm} onreset={resetForm}>
             <div>
-                <h2 class="mb-4">Quest</h2>
+                <h2 class="mb-4">{$_("quest.section_title")}</h2>
 
                 <div class="mb-3">
-                    <label for="name" class="form-label">Name:</label>
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        class="form-control"
-                        required
-                        bind:value={currentQuest.name}
-                    />
+                    <label for="name" class="form-label">
+                        {$_("quest.label_name")}:
+                    </label>
+
+                    <div class="input-group">
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            class="form-control"
+                            required
+                            bind:value={currentQuest.name}
+                            data-bs-toggle="popover"
+                            data-bs-trigger="focus"
+                            data-bs-content={$_("popover.quest_name")}
+                        />
+                        <i class="input-group-text bi bi-asterisk text-danger"
+                        ></i>
+                    </div>
                 </div>
                 <div class="mb-3">
-                    <label for="desc" class="form-label">Description:</label>
+                    <label for="desc" class="form-label"
+                        >{$_("quest.label_desc")}:</label
+                    >
                     <textarea
                         name="desc"
                         id="desc"
                         class="form-control"
-                        required
                         bind:value={currentQuest.desc}
+                        data-bs-toggle="popover"
+                        data-bs-trigger="focus"
+                        data-bs-content={$_("popover.quest_desc")}
                     ></textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="reward" class="form-label">Reward:</label>
-                    <input
-                        type="number"
-                        name="reward"
-                        id="reward"
-                        class="form-control"
-                        required
-                        min="0"
-                        bind:value={currentQuest.reward}
-                    />
+                    <label for="reward" class="form-label"
+                        >{$_("quest.label_reward")}:</label
+                    >
+
+                    <div class="input-group">
+                        <input
+                            type="number"
+                            name="reward"
+                            id="reward"
+                            class="form-control"
+                            required
+                            min="0"
+                            bind:value={currentQuest.reward}
+                            data-bs-toggle="popover"
+                            data-bs-trigger="focus"
+                            data-bs-content={$_("popover.quest_reward")}
+                        />
+                        <i class="input-group-text bi bi-asterisk text-danger"
+                        ></i>
+                    </div>
                 </div>
                 <div class="mb-3">
-                    <label for="duration" class="form-label">Duration:</label>
-                    <input
-                        type="number"
-                        name="duration"
-                        id="duration"
-                        class="form-control"
-                        required
-                        min="0"
-                        bind:value={currentQuest.duration}
-                    />
+                    <label for="duration" class="form-label"
+                        >{$_("quest.label_duration")}:</label
+                    >
+
+                    <div class="input-group">
+                        <input
+                            type="number"
+                            name="duration"
+                            id="duration"
+                            class="form-control"
+                            required
+                            min="0"
+                            bind:value={currentQuest.duration}
+                            data-bs-toggle="popover"
+                            data-bs-trigger="focus"
+                            data-bs-content={$_("popover.quest_duration")}
+                        />
+                        <i class="input-group-text bi bi-asterisk text-danger"
+                        ></i>
+                    </div>
                 </div>
                 <div class="mb-3">
                     <label for="time_limit" class="form-label"
-                        >Time Limit:</label
+                        >{$_("quest.label_time_limit")}:</label
                     >
-                    <input
-                        type="number"
-                        name="time_limit"
-                        id="time_limit"
-                        class="form-control"
-                        required
-                        min="0"
-                        bind:value={currentQuest.timeLimit}
-                    />
+
+                    <div class="input-group">
+                        <input
+                            type="number"
+                            name="time_limit"
+                            id="time_limit"
+                            class="form-control"
+                            required
+                            min="0"
+                            bind:value={currentQuest.timeLimit}
+                            data-bs-toggle="popover"
+                            data-bs-trigger="focus"
+                            data-bs-content={$_("popover.quest_time_limit")}
+                        />
+                        <i class="input-group-text bi bi-asterisk text-danger"
+                        ></i>
+                    </div>
                 </div>
             </div>
 
             <div class="mb-4">
-                <h2 class="mb-4">Events</h2>
+                <h2 class="mb-4">{$_("events.section_title")}</h2>
 
+                <p title={$_("popover.quest_difficulty")}>
+                    <strong>{$_("events.label_difficulty")}:</strong>
+                    {difficulty}
+                </p>
                 {#if currentQuest.events.length === 0}
-                    <p class="text-muted">No events added yet.</p>
-                {:else}
-                    <p><strong>Difficulty:</strong> {difficulty}</p>
+                    <p class="text-muted">{$_("events.text_no_events")}</p>
                 {/if}
 
                 <button
@@ -323,7 +421,8 @@
                     class="btn btn-success mb-3"
                     onclick={addEvent}
                 >
-                    <i class="bi bi-plus-lg"></i> Add Event
+                    <i class="bi bi-plus-lg"></i>
+                    {$_("events.button_add_event")}
                 </button>
 
                 <div class="accordion" id="accordionEvents">
@@ -334,16 +433,19 @@
             </div>
 
             <div class="d-flex justify-content-between">
-                <button type="reset" class="btn btn-danger">Reset</button>
+                <button type="reset" class="btn btn-danger"
+                    >{$_("form.button_reset")}</button
+                >
                 <div>
                     <button
                         type="button"
                         class="btn btn-info"
                         data-bs-toggle="modal"
-                        data-bs-target="#modalImportJSON">Import JSON</button
+                        data-bs-target="#modalImportJSON"
+                        >{$_("form.button_import_json")}</button
                     >
                     <button type="submit" class="btn btn-primary"
-                        >Generate Quest</button
+                        >{$_("form.button_generate_quest")}</button
                     >
                 </div>
             </div>

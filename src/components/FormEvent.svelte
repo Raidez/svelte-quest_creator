@@ -1,5 +1,7 @@
 <script>
     import * as bootstrap from "bootstrap/dist/js/bootstrap.bundle.min";
+    import { onMount } from "svelte";
+    import { _ } from "svelte-i18n";
     import { EventBonus } from "../models.svelte";
     import FormBonus from "./FormBonus.svelte";
 
@@ -11,6 +13,15 @@
         bonus = $bindable(),
         remove,
     } = $props();
+
+    onMount(() => {
+        const popoverTriggerList = document.querySelectorAll(
+            '[data-bs-toggle="popover"]',
+        );
+        [...popoverTriggerList].map(
+            (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl),
+        );
+    });
 
     function addBonus() {
         const newBonus = new EventBonus();
@@ -55,7 +66,7 @@
                 aria-expanded="true"
                 aria-controls="collapse-event-{eventIndex}-bonus-{bonusIndex}"
             >
-                Bonus #{bonusIndex + 1}
+                {$_("bonus.section_title")} #{bonusIndex + 1}
             </button>
         </h2>
         <div
@@ -79,47 +90,68 @@
 
 <main class="mb-4 p-3 border rounded" data-index={index}>
     <div class="d-flex justify-content-between mb-2">
-        <h3>Event</h3>
+        <h3>{$_("event.section_title")}</h3>
         <button type="button" class="btn btn-danger btn-sm" onclick={remove}>
-            <i class="bi bi-trash"></i> Remove
+            <i class="bi bi-trash"></i>
+            {$_("commons.button_remove")}
         </button>
     </div>
 
     <div>
-        <label for="event_name-{index}" class="form-label">Name:</label>
-        <input
-            type="text"
-            id="event_name-{index}"
-            name="event_name-{index}"
-            class="form-control"
-            required
-            bind:value={name}
-        />
+        <label for="event_name-{index}" class="form-label"
+            >{$_("event.label_name")}:</label
+        >
+
+        <div class="input-group">
+            <input
+                type="text"
+                id="event_name-{index}"
+                name="event_name-{index}"
+                class="form-control"
+                required
+                bind:value={name}
+                data-bs-toggle="popover"
+                data-bs-trigger="focus"
+                data-bs-content={$_("popover.event_name")}
+            />
+            <i class="input-group-text bi bi-asterisk text-danger"></i>
+        </div>
     </div>
     <div>
-        <label for="event_desc-{index}" class="form-label">Description:</label>
+        <label for="event_desc-{index}" class="form-label"
+            >{$_("event.label_desc")}:</label
+        >
         <textarea
             name="event_desc-{index}"
             id="event_desc-{index}"
             class="form-control"
-            required
             bind:value={desc}
+            data-bs-toggle="popover"
+            data-bs-trigger="focus"
+            data-bs-content={$_("popover.event_desc")}
         ></textarea>
     </div>
     <div>
         <label for="event_difficulty-{index}" class="form-label"
-            >Difficulty:</label
+            >{$_("event.label_difficulty")}:</label
         >
-        <input
-            type="number"
-            name="event_difficulty-{index}"
-            id="event_difficulty-{index}"
-            class="form-control"
-            required
-            min="0"
-            max="100"
-            bind:value={difficulty}
-        />
+
+        <div class="input-group">
+            <input
+                type="number"
+                name="event_difficulty-{index}"
+                id="event_difficulty-{index}"
+                class="form-control"
+                required
+                min="0"
+                max="100"
+                bind:value={difficulty}
+                data-bs-toggle="popover"
+                data-bs-trigger="focus"
+                data-bs-content={$_("popover.event_difficulty")}
+            />
+            <i class="input-group-text bi bi-asterisk text-danger"></i>
+        </div>
     </div>
 
     <button
@@ -128,7 +160,8 @@
         data-index={index}
         onclick={addBonus}
     >
-        <i class="bi bi-plus-lg"></i> Add Bonus
+        <i class="bi bi-plus-lg"></i>
+        {$_("event.button_add_bonus")}
     </button>
 
     <div class="accordion" id="accordionEvent{index}Bonus">
