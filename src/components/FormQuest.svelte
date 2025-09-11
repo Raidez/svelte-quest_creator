@@ -6,6 +6,7 @@
     import toastify from "toastify-js";
     import { Quest, QuestEvent } from "../models.svelte";
     import FormEvent from "./FormEvent.svelte";
+    import { askChat } from "../chatbot.js";
 
     let currentQuest = $state(new Quest());
     let textareaImport = $state("");
@@ -17,10 +18,18 @@
                 .reduce((acc, val) => acc * val, 1) * 100,
         ),
     );
+    let api_key = $state("");
+    let aiResponse = $state("");
 
-    // Ensure popovers are initialized on mount
+    // onMount lifecycle hook
     onMount(() => {
+        // Initialize Bootstrap popovers
         initializePopovers();
+
+        // Load saved API key from cookies
+        cookieStore.get("api_key").then((item) => {
+            if (item) api_key = item.value;
+        });
     });
 
     // Re-initialize popovers when locale changes
@@ -31,6 +40,19 @@
         }, 0);
         cookieStore.set("locale", get(locale));
     });
+
+    function completeWithAI(event) {
+        event.preventDefault();
+        if (!api_key) return;
+        cookieStore.set("api_key", api_key);
+
+        const prompt = JSON.stringify(currentQuest.toJSON(), null, 4);
+        askChat(api_key, prompt).then((response) => {
+            if (typeof response === "string") {
+                aiResponse = response;
+            }
+        });
+    }
 
     function switchLocale() {
         switch (get(locale)) {
@@ -279,24 +301,95 @@
     </div>
 </div>
 
+<div id="modalAskAI" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Ask AI</h5>
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label={$_("commons.button_close")}
+                ></button>
+            </div>
+            <form onsubmit={completeWithAI}>
+                <div class="modal-body">
+                    <label for="api_key" class="form-label"> API key: </label>
+                    <input
+                        type="text"
+                        id="api_key"
+                        name="api_key"
+                        class="form-control"
+                        required
+                        bind:value={api_key}
+                    />
+
+                    {#if aiResponse}
+                        <div class="mt-3">
+                            <label for="ai_response" class="form-label"
+                                >AI Response:</label
+                            >
+                            <textarea
+                                id="ai_response"
+                                name="ai_response"
+                                class="form-control"
+                                rows="10"
+                                readonly
+                                bind:value={aiResponse}
+                            ></textarea>
+                        </div>
+                    {/if}
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                        >{$_("commons.button_close")}</button
+                    >
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-robot"></i>
+                        Complete with AI
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <main class="bg-light">
     <div class="container py-5">
-        <h1 class="mb-4">
-            {$_("website_title")}
+        <h1 class="mb-4 row justify-content-between align-items-center">
+            <div class="col-auto">
+                {$_("website_title")}
 
-            <button
-                type="button"
-                class="btn"
-                onclick={switchLocale}
-                aria-label={$_("button_switch_language")}
-                title={$_("button_switch_language")}
-            >
-                {#if $locale === "fr"}
-                    <i class="fi fi-us"></i>
-                {:else if $locale === "en"}
-                    <i class="fi fi-fr"></i>
-                {/if}
-            </button>
+                <button
+                    type="button"
+                    class="btn"
+                    onclick={switchLocale}
+                    aria-label={$_("button_switch_language")}
+                    title={$_("button_switch_language")}
+                >
+                    {#if $locale === "fr"}
+                        <i class="fi fi-us"></i>
+                    {:else if $locale === "en"}
+                        <i class="fi fi-fr"></i>
+                    {/if}
+                </button>
+            </div>
+            <div class="col-auto">
+                <button
+                    type="button"
+                    class="btn"
+                    data-bs-toggle="modal"
+                    data-bs-target="#modalAskAI"
+                    aria-label="Ask AI"
+                    title="Ask AI"
+                >
+                    <i class="bi bi-stars fs-2"></i>
+                </button>
+            </div>
         </h1>
         <form class="card card-body" onsubmit={submitForm} onreset={resetForm}>
             <div>
