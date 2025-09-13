@@ -1,4 +1,6 @@
 import { Mistral } from '@mistralai/mistralai';
+import { _ } from 'svelte-i18n';
+import { get } from 'svelte/store';
 
 async function askChat(apiKey, question) {
     const client = new Mistral({ apiKey: apiKey });
@@ -9,6 +11,7 @@ async function askChat(apiKey, question) {
         model: 'mistral-small-latest',
         messages: [
             { role: "system", content: system },
+            { role: "system", content: get(_)("ai.language") },
             { role: 'user', content: question }
         ],
     });
@@ -17,3 +20,4 @@ async function askChat(apiKey, question) {
 }
 
 export { askChat };
+

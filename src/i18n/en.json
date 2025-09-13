@@ -154,6 +154,7 @@
     "ai": {
         "button": "Ask AI",
         "popover": "Your Mistral API key",
-        "invalid": "Your Mistral API key is invalid"
+        "invalid": "Your Mistral API key is invalid",
+        "language": "Respond only in English."
     }
 }

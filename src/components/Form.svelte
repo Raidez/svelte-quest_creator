@@ -15,6 +15,7 @@
     let currentQuest = $state(new Quest());
 
     let openModalImport = $state(false);
+    let importText = $state("");
     let openModalExport = $state(false);
     let exportedJSON = $derived(JSON.stringify(currentQuest.toJSON(), null, 4));
 
@@ -97,26 +98,19 @@
                     // @ts-ignore
                 }).showToast();
 
-                try {
-                    currentQuest = Quest.fromJSON(JSON.parse(response));
-                } catch (error) {
-                    toastify({
-                        text: $_("toast.invalid_quest_json"),
-                        duration: 3000,
-                        gravity: "top",
-                        position: "right",
-                        style: {
-                            background: "#ff6f61",
-                        },
-                        // @ts-ignore
-                    }).showToast();
-                }
+                importText = response;
+                openModalImport = true;
             }
         });
     }
 </script>
 
-<ModalImportJson bind:open={openModalImport} onimport={importJSON} />
+<ModalImportJson
+    bind:open={openModalImport}
+    validateJSON={Quest.checkJSON}
+    text={importText}
+    onimport={importJSON}
+/>
 
 <ModalExportJson bind:open={openModalExport} text={exportedJSON} />
 

@@ -2,10 +2,24 @@
     import * as bootstrap from "bootstrap/dist/js/bootstrap.bundle.min";
     import { _ } from "svelte-i18n";
 
-    let { open = $bindable(false), onimport } = $props();
+    let {
+        open = $bindable(false),
+        text = "",
+        validateJSON = null,
+        onimport,
+    } = $props();
 
-    let text = $state("");
-    let isValidJSON = $state(true);
+    let isValidJSON = $derived.by(() => {
+        try {
+            let parsed = JSON.parse(text);
+            if (validateJSON) {
+                return validateJSON(parsed);
+            }
+            return true;
+        } catch (error) {
+            return false;
+        }
+    });
 
     let modal, modalElement;
 
@@ -25,20 +39,10 @@
         event.preventDefault();
         event.stopPropagation();
 
-        try {
-            let parsedJSON = JSON.parse(text);
-            isValidJSON = true;
-            onimport(parsedJSON);
+        if (isValidJSON) {
+            onimport(JSON.parse(text));
             modal.hide();
-        } catch (error) {
-            isValidJSON = false;
-            console.error("Error importing JSON:", error);
         }
-    }
-
-    // Reset form
-    function handleReset(event) {
-        isValidJSON = true;
     }
 
     // Allow to reopen modal
@@ -59,11 +63,7 @@
                     aria-label={$_("commons.button_close")}
                 ></button>
             </div>
-            <form
-                onsubmit={handleSubmit}
-                onreset={handleReset}
-                novalidate={!isValidJSON}
-            >
+            <form onsubmit={handleSubmit} novalidate={!isValidJSON}>
                 <div class="modal-body">
                     <div class="has-validation">
                         <label for="json">

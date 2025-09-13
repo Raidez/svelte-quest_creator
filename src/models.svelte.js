@@ -40,6 +40,42 @@ class Quest {
         };
     }
 
+    static checkJSON(json) {
+        const jobs = [
+            "warrior",
+            "paladin",
+            "mage",
+            "rogue",
+            "healer",
+            "bard",
+            "summoner",
+        ];
+
+        if (typeof json !== "object" || json._type !== "quest") return false;
+        if (typeof json.name !== "string") return false;
+        if (typeof json.desc !== "string") return false;
+        if (typeof json.reward !== "number") return false;
+        if (typeof json.duration !== "number") return false;
+        if (typeof json.time_limit !== "number") return false;
+        if (!Array.isArray(json.events)) return false;
+        for (const event of json.events) {
+            if (typeof event !== "object" || event._type !== "event") return false;
+            if (typeof event.name !== "string") return false;
+            if (typeof event.desc !== "string") return false;
+            if (typeof event.difficulty !== "number") return false;
+            if (!Array.isArray(event.bonus)) return false;
+            for (const bonus of event.bonus) {
+                if (typeof bonus !== "object" || bonus._type !== "bonus") return false;
+                if (typeof bonus.type !== "string" || !["item", "job"].includes(bonus.type)) return false;
+                if (bonus.type === "item" && typeof bonus.item !== "string") return false;
+                if (bonus.type === "job" && typeof bonus.job !== "string") return false;
+                if (bonus.type === "job" && !jobs.includes(bonus.job)) return false;
+                if (typeof bonus.value !== "number") return false;
+            }
+        }
+        return true;
+    }
+
     static fromJSON(json) {
         const quest = new Quest(json.name, json.desc, json.reward, json.duration, json.time_limit, []);
         quest.events = (json.events || []).map(eventJson => {

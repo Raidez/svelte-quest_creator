@@ -69,6 +69,68 @@ It generates quests in the following JSON format:
         }
     ]
 }
+{
+    "_type": "quest",
+    "name": "Battle for the Ancient Fortress",
+    "desc": "Lead your party to reclaim the fortress from a horde of undead warriors.",
+    "reward": 600,
+    "duration": 4,
+    "time_limit": 6,
+    "events": [
+        {
+            "_type": "event",
+            "name": "Break Through the Outer Gates",
+            "desc": "Face the undead guards and breach the heavily fortified entrance.",
+            "difficulty": 75,
+            "bonus": [
+                {
+                    "_type": "bonus",
+                    "type": "item",
+                    "item": "crowbar",
+                    "value": 7
+                },
+                {
+                    "_type": "bonus",
+                    "type": "job",
+                    "job": "warrior",
+                    "value": 10
+                },
+                {
+                    "_type": "bonus",
+                    "type": "item",
+                    "item": "shield",
+                    "value": 5
+                }
+            ]
+        },
+        {
+            "_type": "event",
+            "name": "Defeat the Undead Champion",
+            "desc": "Confront the powerful champion guarding the fortress hall.",
+            "difficulty": 65,
+            "bonus": [
+                {
+                    "_type": "bonus",
+                    "type": "item",
+                    "item": "diamond",
+                    "value": 6
+                },
+                {
+                    "_type": "bonus",
+                    "type": "job",
+                    "job": "paladin",
+                    "value": 8
+                },
+                {
+                    "_type": "bonus",
+                    "type": "item",
+                    "item": "armor",
+                    "value": 7
+                }
+            ]
+        }
+    ]
+}
 
 A quest has:
 - name: The name of the quest
@@ -106,7 +168,17 @@ To succeed in the quest, the player must succeed in all events.
 Without bonuses, the player has a 48% chance of completing the quest (0.8 * 0.6 = 0.48).
 
 ==== INSTRUCTIONS ====
-Complete the following quest in the same JSON format.
+IMPORTANT: Always ensure the overall success chance (product of all event difficulties, as decimals, without bonuses) is between 0.4 and 0.8 (40% to 80%). If the calculated chance is below 0.4, increase the event difficulties until it is in range.
+
+Most event difficulties should be between 60 and 90.
+
+Before generating the quest, calculate the overall success chance as the product of all event difficulties (as decimals, e.g. 80% = 0.8), without bonuses.
+Example: For two events with difficulties 80 and 60, the overall chance is 0.8 * 0.6 = 0.48 (48%).
+
+Do not always start the quest with a search or travel event. Vary the type and theme of the first event (e.g. combat, puzzle, negotiation, exploration, etc.). Also, vary the bonuses: do not always use torch, compass, or rogue as the first event’s bonuses.
+
+Be creative with event types and bonuses. Avoid repeating the same event structure as previous examples.
+
 Output only valid JSON, no explanations, notes, or markdown.
 Do not add or hallucinate extra fields.
 Respect the original language (English or French) of the input.

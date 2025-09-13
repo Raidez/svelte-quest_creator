@@ -3,7 +3,7 @@
     import { _ } from "svelte-i18n";
     import toastify from "toastify-js";
 
-    let { open = $bindable(false), text = $bindable("") } = $props();
+    let { open = $bindable(false), text = "" } = $props();
 
     let modal, modalElement;
 

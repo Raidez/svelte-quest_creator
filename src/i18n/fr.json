@@ -155,6 +155,7 @@
     "ai": {
         "button": "Demander à l'IA",
         "popover": "Votre clé API Mistral",
-        "invalid": "Votre clé API Mistral est invalide"
+        "invalid": "Votre clé API Mistral est invalide",
+        "language": "Répond uniquement en français."
     }
 }
