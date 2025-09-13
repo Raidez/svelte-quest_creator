@@ -3,6 +3,7 @@
     import { onMount } from "svelte";
     import { _ } from "svelte-i18n";
     import { EventBonus } from "../models.svelte";
+    import { initializePopovers } from "../utils";
     import FormBonus from "./FormBonus.svelte";
 
     let {
@@ -15,12 +16,7 @@
     } = $props();
 
     onMount(() => {
-        const popoverTriggerList = document.querySelectorAll(
-            '[data-bs-toggle="popover"]',
-        );
-        [...popoverTriggerList].map(
-            (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl),
-        );
+        initializePopovers();
     });
 
     function addBonus() {

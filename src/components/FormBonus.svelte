@@ -1,7 +1,7 @@
 <script>
-    import * as bootstrap from "bootstrap/dist/js/bootstrap.bundle.min";
     import { onMount } from "svelte";
     import { _ } from "svelte-i18n";
+    import { initializePopovers } from "../utils";
 
     let {
         index = 0,
@@ -33,12 +33,7 @@
         });
 
     onMount(() => {
-        const popoverTriggerList = document.querySelectorAll(
-            '[data-bs-toggle="popover"]',
-        );
-        [...popoverTriggerList].map(
-            (popoverTriggerEl) => new bootstrap.Popover(popoverTriggerEl),
-        );
+        initializePopovers();
     });
 
     function selectItem(itemName) {

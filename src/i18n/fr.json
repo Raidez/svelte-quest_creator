@@ -32,7 +32,7 @@
         "label_name_job": "Titre du métier",
         "label_value": "Valeur"
     },
-    
+
     "items": {
         "gold": {
             "name": "or",
@@ -110,17 +110,19 @@
 
     "commons": {
         "button_close": "Fermer",
-		"button_remove": "Supprimer"
+        "button_remove": "Supprimer",
+        "button_reset": "Réinitialiser"
     },
     "form": {
-        "button_reset": "Réinitialiser",
         "button_import_json": "Importer JSON",
         "button_generate_quest": "Générer la quête"
     },
     "modal": {
         "import": {
             "title": "Collez votre JSON ici",
-            "button_import": "Importer JSON"
+            "button_import": "Importer JSON",
+            "label_json": "JSON",
+            "alert_invalid": "JSON invalide"
         },
         "export": {
             "title": "Votre JSON de quête",
@@ -135,7 +137,7 @@
         "invalid_quest_json": "Structure du JSON de quête invalide !",
         "quest_json_copied": "Le JSON de la quête a été copié dans le presse-papiers !"
     },
-	"popover": {
+    "popover": {
         "quest_name": "Le nom de ta quête.",
         "quest_desc": "Une petite description pour ta quête.",
         "quest_reward": "La récompense que tu recevras à la fin.",
@@ -149,5 +151,10 @@
         "bonus_name_item": "L'objet qui augmentera les chances de réussite.",
         "bonus_name_job": "Le métier qui augmentera les chances de réussite.",
         "bonus_value": "De combien ce bonus augmentera les chances de réussite."
-	}
+    },
+    "ai": {
+        "button": "Demander à l'IA",
+        "popover": "Votre clé API Mistral",
+        "invalid": "Votre clé API Mistral est invalide"
+    }
 }

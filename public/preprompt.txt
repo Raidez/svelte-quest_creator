@@ -1,0 +1,113 @@
+==== CONTEXT ====
+Quest Creator is a tool for creating quests in a fantasy role-playing game.
+It generates quests in the following JSON format:
+{
+    "_type": "quest",
+    "name": "Save the village",
+    "desc": "Help the villagers by defeating the monsters.",
+    "reward": 400,
+    "duration": 3,
+    "time_limit": 5,
+    "events": [
+        {
+            "_type": "event",
+            "name": "Travel to the village",
+            "desc": "Make your way through the forest to reach the village.",
+            "difficulty": 80,
+            "bonus": [
+                {
+                    "_type": "bonus",
+                    "type": "item",
+                    "item": "compass",
+                    "value": 5
+                },
+                {
+                    "_type": "bonus",
+                    "type": "item",
+                    "item": "torch",
+                    "value": 2
+                },
+                {
+                    "_type": "bonus",
+                    "type": "job",
+                    "job": "summoner",
+                    "value": 6
+                }
+            ]
+        },
+        {
+            "_type": "event",
+            "name": "Defeat the monsters",
+            "desc": "Fight the monsters threatening the village.",
+            "difficulty": 60,
+            "bonus": [
+                {
+                    "_type": "bonus",
+                    "type": "item",
+                    "item": "health potion",
+                    "value": 8
+                },
+                {
+                    "_type": "bonus",
+                    "type": "item",
+                    "item": "oil",
+                    "value": 12
+                },
+                {
+                    "_type": "bonus",
+                    "type": "item",
+                    "item": "trap",
+                    "value": 5
+                },
+                {
+                    "_type": "bonus",
+                    "type": "item",
+                    "item": "amulet",
+                    "value": 8
+                }
+            ]
+        }
+    ]
+}
+
+A quest has:
+- name: The name of the quest
+- desc: A description of the quest
+- reward: The reward for completing the quest (in gold)
+- duration: The estimated time to complete the quest (in days)
+- time_limit: The time limit to complete the quest (in days)
+- events: A list of events that make up the quest
+
+Each event has:
+- name: The name of the event
+- desc: A description of the event
+- difficulty: The difficulty of the event (0-100, higher = easier)
+- bonus: A list of bonuses that can help with the event
+
+Each bonus has:
+- type: "item" or "job"
+- item: The name of the item (if type is "item")
+- job: The name of the job (if type is "job")
+- value: The value of the bonus (percentage points)
+
+Items and Jobs are predefined in the game.
+Prefer existing items, but you may invent new ones if needed. If you invent new items, make sure they fit the fantasy theme.
+
+Existing Items:
+- gold, diamond, ration, torch, lamp, lockpick, crowbar, rope, compass, trap, amulet, arrows, helmet, shield, armor, bandage, health potion, oil
+
+Jobs:
+- warrior (melee), paladin (melee), mage (range), rogue (range), healer (support), bard (support), summoner (support)
+
+Explanation:
+On the quest "Save the village", the event "Travel to the village" has a difficulty of 80 (80% chance of success).
+Bonuses increase the chance of success for each event.
+To succeed in the quest, the player must succeed in all events.
+Without bonuses, the player has a 48% chance of completing the quest (0.8 * 0.6 = 0.48).
+
+==== INSTRUCTIONS ====
+Complete the following quest in the same JSON format.
+Output only valid JSON, no explanations, notes, or markdown.
+Do not add or hallucinate extra fields.
+Respect the original language (English or French) of the input.
+Format the output as pretty-printed JSON.

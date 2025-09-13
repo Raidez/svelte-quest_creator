@@ -1,153 +1,159 @@
 {
-	"website_title": "Quest Creator",
-	"button_switch_language": "Switch Language",
+    "website_title": "Quest Creator",
+    "button_switch_language": "Switch Language",
 
-	"quest": {
-		"section_title": "Quest",
-		"label_name": "Name",
-		"label_desc": "Description",
-		"label_reward": "Reward",
-		"label_duration": "Duration",
-		"label_time_limit": "Time Limit"
-	},
-	"events": {
-		"section_title": "Events",
-		"text_no_events": "No events added yet.",
-		"label_difficulty": "Difficulty",
-		"button_add_event": "Add Event"
-	},
-	"event": {
-		"section_title": "Event",
-		"label_name": "Name",
-		"label_desc": "Description",
-		"label_difficulty": "Difficulty",
-		"button_add_bonus": "Add Bonus"
-	},
-	"bonus": {
-		"section_title": "Bonus",
-		"label_type": "Type",
-		"label_type_item": "Item",
-		"label_type_job": "Job",
-		"label_name_item": "Item Name",
-		"label_name_job": "Job Title",
-		"label_value": "Value"
-	},
+    "quest": {
+        "section_title": "Quest",
+        "label_name": "Name",
+        "label_desc": "Description",
+        "label_reward": "Reward",
+        "label_duration": "Duration",
+        "label_time_limit": "Time Limit"
+    },
+    "events": {
+        "section_title": "Events",
+        "text_no_events": "No events added yet.",
+        "label_difficulty": "Difficulty",
+        "button_add_event": "Add Event"
+    },
+    "event": {
+        "section_title": "Event",
+        "label_name": "Name",
+        "label_desc": "Description",
+        "label_difficulty": "Difficulty",
+        "button_add_bonus": "Add Bonus"
+    },
+    "bonus": {
+        "section_title": "Bonus",
+        "label_type": "Type",
+        "label_type_item": "Item",
+        "label_type_job": "Job",
+        "label_name_item": "Item Name",
+        "label_name_job": "Job Title",
+        "label_value": "Value"
+    },
 
-	"items": {
-		"gold": {
-			"name": "gold",
-			"desc": "Source of happiness."
-		},
-		"diamond": {
-			"name": "diamond",
-			"desc": "Bring joy to everyone."
-		},
-		"ration": {
-			"name": "ration",
-			"desc": "Keeps heroes fed."
-		},
-		"torch": {
-			"name": "torch",
-			"desc": "Provides light in dark areas."
-		},
-		"lamp": {
-			"name": "lamp",
-			"desc": "Better light source than a torch."
-		},
-		"lockpick": {
-			"name": "lockpick",
-			"desc": "Unlocks chests and doors."
-		},
-		"crowbar": {
-			"name": "crowbar",
-			"desc": "Also unlock chests and doors with more force."
-		},
-		"rope": {
-			"name": "rope",
-			"desc": "Useful for climbing and tying things."
-		},
-		"compass": {
-			"name": "compass",
-			"desc": "Helps with navigation."
-		},
-		"trap": {
-			"name": "trap",
-			"desc": "Catch them all!"
-		},
-		"amulet": {
-			"name": "amulet",
-			"desc": "A magical amulet that grants protection."
-		},
-		"arrows": {
-			"name": "arrows",
-			"desc": "Ammunition for bows."
-		},
-		"helmet": {
-			"name": "helmet",
-			"desc": "A helmet that protects the head."
-		},
-		"shield": {
-			"name": "shield",
-			"desc": "A sturdy shield for blocking attacks."
-		},
-		"armor": {
-			"name": "armor",
-			"desc": "Protective armor that reduces damage."
-		},
-		"bandage": {
-			"name": "bandage",
-			"desc": "Heal small wounds."
-		},
-		"health potion": {
-			"name": "health potion",
-			"desc": "A potion that restores health."
-		},
-		"oil": {
-			"name": "oil",
-			"desc": "Fire in a bottle."
-		}
-	},
-
-	"commons": {
-		"button_close": "Close",
-		"button_remove": "Remove"
-	},
-	"form": {
-		"button_reset": "Reset",
-		"button_import_json": "Import JSON",
-		"button_generate_quest": "Generate Quest"
-	},
-	"modal": {
-		"import": {
-			"title": "Paste your JSON here",
-			"button_import": "Import JSON"
-		},
-		"export": {
-			"title": "Your Quest JSON",
-			"button_copy": "Copy to Clipboard"
-		},
-		"pick_item": {
-			"title": "Pick item"
-		}
-	},
-	"toast": {
-		"invalid_json": "Invalid JSON!",
-		"invalid_quest_json": "Invalid Quest JSON structure!",
-		"quest_json_copied": "Quest JSON copied to clipboard!"
-	},
-	"popover": {
-		"quest_name": "The name of your quest.",
-		"quest_desc": "A short description for your quest.",
-		"quest_reward": "The reward you will receive at the end.",
-		"quest_duration": "How many days to finish your quest.",
-		"quest_time_limit": "The maximum time to complete your quest (in days).",
-		"quest_difficulty": "The overall success rate of your quest.",
-		"event_name": "The name of the event.",
-		"event_desc": "A short description for the event.",
-		"event_difficulty": "The success rate of this event.",
-		"bonus_type": "The type of bonus.",
-		"bonus_name_item": "The item that will increase the success rate.",
-		"bonus_name_job": "The job that will increase the success rate.",
-		"bonus_value": "How much this bonus will increase the success rate."
-	}
+    "items": {
+        "gold": {
+            "name": "gold",
+            "desc": "Source of happiness."
+        },
+        "diamond": {
+            "name": "diamond",
+            "desc": "Bring joy to everyone."
+        },
+        "ration": {
+            "name": "ration",
+            "desc": "Keeps heroes fed."
+        },
+        "torch": {
+            "name": "torch",
+            "desc": "Provides light in dark areas."
+        },
+        "lamp": {
+            "name": "lamp",
+            "desc": "Better light source than a torch."
+        },
+        "lockpick": {
+            "name": "lockpick",
+            "desc": "Unlocks chests and doors."
+        },
+        "crowbar": {
+            "name": "crowbar",
+            "desc": "Also unlock chests and doors with more force."
+        },
+        "rope": {
+            "name": "rope",
+            "desc": "Useful for climbing and tying things."
+        },
+        "compass": {
+            "name": "compass",
+            "desc": "Helps with navigation."
+        },
+        "trap": {
+            "name": "trap",
+            "desc": "Catch them all!"
+        },
+        "amulet": {
+            "name": "amulet",
+            "desc": "A magical amulet that grants protection."
+        },
+        "arrows": {
+            "name": "arrows",
+            "desc": "Ammunition for bows."
+        },
+        "helmet": {
+            "name": "helmet",
+            "desc": "A helmet that protects the head."
+        },
+        "shield": {
+            "name": "shield",
+            "desc": "A sturdy shield for blocking attacks."
+        },
+        "armor": {
+            "name": "armor",
+            "desc": "Protective armor that reduces damage."
+        },
+        "bandage": {
+            "name": "bandage",
+            "desc": "Heal small wounds."
+        },
+        "health potion": {
+            "name": "health potion",
+            "desc": "A potion that restores health."
+        },
+        "oil": {
+            "name": "oil",
+            "desc": "Fire in a bottle."
+        }
+    },
+    "commons": {
+        "button_close": "Close",
+        "button_remove": "Remove",
+        "button_reset": "Reset"
+    },
+    "form": {
+        "button_import_json": "Import JSON",
+        "button_generate_quest": "Generate Quest"
+    },
+    "modal": {
+        "import": {
+            "title": "Paste your JSON here",
+            "button_import": "Import JSON",
+            "label_json": "JSON Input",
+            "alert_invalid": "JSON is invalid"
+        },
+        "export": {
+            "title": "Your Quest JSON",
+            "button_copy": "Copy to Clipboard"
+        },
+        "pick_item": {
+            "title": "Pick item"
+        }
+    },
+    "toast": {
+        "invalid_json": "Invalid JSON!",
+        "invalid_quest_json": "Invalid Quest JSON structure!",
+        "quest_json_copied": "Quest JSON copied to clipboard!"
+    },
+    "popover": {
+        "quest_name": "The name of your quest.",
+        "quest_desc": "A short description for your quest.",
+        "quest_reward": "The reward you will receive at the end.",
+        "quest_duration": "How many days to finish your quest.",
+        "quest_time_limit": "The maximum time to complete your quest (in days).",
+        "quest_difficulty": "The overall success rate of your quest.",
+        "event_name": "The name of the event.",
+        "event_desc": "A short description for the event.",
+        "event_difficulty": "The success rate of this event.",
+        "bonus_type": "The type of bonus.",
+        "bonus_name_item": "The item that will increase the success rate.",
+        "bonus_name_job": "The job that will increase the success rate.",
+        "bonus_value": "How much this bonus will increase the success rate."
+    },
+    "ai": {
+        "button": "Ask AI",
+        "popover": "Your Mistral API key",
+        "invalid": "Your Mistral API key is invalid"
+    }
 }
